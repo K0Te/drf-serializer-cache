@@ -30,7 +30,7 @@ setup(
     keywords='drf cache performance',
     install_requires=['django', 'djangorestframework'],
     setup_requires=['pytest-runner'],
-    tests_require=['pytest'],
+    tests_require=['pytest', 'pytest-cov'],
     test_suite='tests.functional',
     packages=find_packages(exclude=['tests']),  # Required
     project_urls={  # Optional
