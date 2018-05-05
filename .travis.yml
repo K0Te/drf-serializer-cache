@@ -4,5 +4,6 @@ python:
   - "3.5"
   - "3.6"
 script:
+  - pip install coveralls
   - python setup.py test
   - coveralls
