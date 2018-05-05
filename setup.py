@@ -31,6 +31,9 @@ setup(
     ],
     keywords='drf cache performance',
     install_requires=['django', 'djangorestframework'],
+    setup_requires=['pytest-runner'],
+    tests_require=['pytest'],
+    test_suite='tests.functional',
     packages=find_packages(exclude=['tests']),  # Required
     project_urls={  # Optional
         'Bug Reports': 'https://github.com/K0Te/drf-serializer-cache/issues',
