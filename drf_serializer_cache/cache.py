@@ -4,7 +4,7 @@ from django.utils.functional import cached_property
 from rest_framework.serializers import ListSerializer
 
 
-class SerializerCacheMixin(object):
+class SerializerCacheMixin:
     """Mixin for DRF serializer performance improvement.
 
     Provides cache for slow "fields" property."""
@@ -34,18 +34,16 @@ class SerializerCacheMixin(object):
         """Convert instance to representation with result caching."""
         if self._is_first_cachable:
             with self._setup_cache():
-                return super(SerializerCacheMixin, self) \
-                    .to_representation(instance)
+                return super().to_representation(instance)
         cache = self.root._representation_cache
         key = (instance, self.__class__)
         try:
             if key not in cache:
-                cache[key] = super(SerializerCacheMixin, self) \
-                    .to_representation(instance)
+                cache[key] = super().to_representation(instance)
             return cache[key]
         # key might not be hashable
         except TypeError:
-            return super(SerializerCacheMixin, self).to_representation(instance)
+            return super().to_representation(instance)
 
     @property
     def fields(self):
@@ -53,9 +51,9 @@ class SerializerCacheMixin(object):
         try:
             cache = self.root._field_cache
         except AttributeError:
-            return super(SerializerCacheMixin, self).fields
+            return super().fields
         if self.__class__ not in cache:
-            cache[self.__class__] = super(SerializerCacheMixin, self).fields
+            cache[self.__class__] = super().fields
         return cache[self.__class__]
 
 
