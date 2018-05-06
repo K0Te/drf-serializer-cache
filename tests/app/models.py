@@ -1,5 +1,3 @@
-"""Currencies application data model."""
-
 from django.db import models
 
 
