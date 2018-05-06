@@ -18,6 +18,9 @@ into an issue, if multiple object include same dependent hard-to-serialize
 objects. Cache avoid re-computing instance representation if it encounters
 same instances multiple times.
 
+## Performance results
+![Performance results](performance.svg)
+
 ## Cache life-time and invalidation
 Cache is designed to be simple and non-error-prone.
 Cache is created when top-level serializer `to_representation` starts
