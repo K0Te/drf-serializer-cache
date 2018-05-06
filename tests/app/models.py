@@ -4,6 +4,7 @@ from django.db import models
 class User(models.Model):
     id = models.AutoField('Identifier', primary_key=True)
     name = models.CharField('Name', max_length=70)
+    email = models.EmailField()
 
 
 class FilmCategory(models.Model):
