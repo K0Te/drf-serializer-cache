@@ -11,7 +11,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='drf-serializer-cache',
-    version='0.2',
+    version='0.3.1',
     description='Django REST framework (DRF) serializer speedup',
     license='BSD',
     long_description=long_description,
