@@ -19,3 +19,16 @@ class Film(models.Model):
     name = models.CharField('Name', max_length=70)
     uploaded_by = models.ForeignKey(User)
     category = models.ForeignKey(FilmCategory)
+
+
+class CategoryHierarchy:
+    def __init__(self, category, films=None, categories=None):
+        self.category = category
+        if films is None:
+            self.films = []
+        else:
+            self.films = films
+        if categories is None:
+            self.categories = []
+        else:
+            self.categories = categories
