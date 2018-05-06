@@ -72,3 +72,24 @@ def test_point_same_element():
     assert serializer.data[-1]['y'] == 4
     # cached variant yields 2 - as there are two distinct objects
     assert serializer.data[-1]['count'] == 2
+
+
+def test_root_non_cachable():
+    class RootSerializer(Serializer):
+        points = PointSerializer(many=True)
+
+    serializer = RootSerializer(
+        {'points': [{'x': 1, 'xx': 123}, {'x': 123, 'xx': 456}]})
+    assert serializer.data['points'][0]['x'] == 1
+    assert serializer.data['points'][0]['y'] == 123
+    assert serializer.data['points'][1]['x'] == 123
+    assert serializer.data['points'][1]['y'] == 456
+
+
+def test_validate_serializer():
+    p = PointSerializer(data={'x': 1, 'y': 123})
+    p.is_valid(raise_exception=True)
+
+    data = p.validated_data
+    assert data['x'] == 1
+    assert data['xx'] == 123
