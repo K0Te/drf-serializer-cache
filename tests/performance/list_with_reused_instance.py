@@ -1,6 +1,7 @@
 import os
 import django
-
+import sys
+sys.path.append(os.getcwd())
 os.environ['DJANGO_SETTINGS_MODULE'] = 'tests.settings'  # noqa
 django.setup()  # noqa
 
@@ -30,7 +31,9 @@ class PointSerializer(Serializer):
 
 
 class CachedPointSerializer(SerializerCacheMixin, PointSerializer):
-    pass
+
+    class Meta:
+        """Just some empty meta info."""
 
 
 class LineSerializer(Serializer):
@@ -41,6 +44,9 @@ class LineSerializer(Serializer):
 class CachedLineSerializer(SerializerCacheMixin, Serializer):
     start = CachedPointSerializer()
     end = CachedPointSerializer()
+
+    class Meta:
+        """Just some empty meta info."""
 
 
 start_point = Point(0, 0, 0)
