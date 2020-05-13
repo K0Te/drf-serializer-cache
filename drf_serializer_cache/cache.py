@@ -56,10 +56,20 @@ class SerializerCacheMixin:
             cache[self.__class__] = super().fields
         return cache[self.__class__]
 
+    @classmethod
+    def many_init(cls, *args, **kwargs):
+        """Use cached list serializer if possible."""
+        meta = getattr(cls, 'Meta', None)
+        if meta is not None and not hasattr(meta, 'list_serializer_class'):
+            # Meta has no custom list serializer, it's safe to use optimized
+            meta.list_serializer_class = CachedListSerializer
+        elif meta is None:
+            cls.Meta = type(
+                'Meta',
+                tuple(),
+                {'list_serializer_class': CachedListSerializer})
+        return super().many_init(*args, **kwargs)
+
 
 class CachedListSerializer(SerializerCacheMixin, ListSerializer):
     pass
-
-
-SerializerCacheMixin.Meta = type(
-    'Meta', tuple(), {'list_serializer_class': CachedListSerializer})

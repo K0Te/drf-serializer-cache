@@ -1,6 +1,7 @@
 import os
 import django
-
+import sys
+sys.path.append(os.getcwd())
 os.environ['DJANGO_SETTINGS_MODULE'] = 'tests.settings'  # noqa
 django.setup()  # noqa
 
